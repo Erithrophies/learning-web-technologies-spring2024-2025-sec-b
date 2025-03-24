@@ -1,0 +1,64 @@
+<html lang="en">
+    <head>
+        <title>Validate Name Page</title>
+    </head>
+    <body>
+        <form action="" onclick="return check()">
+            <label>Name</label><br/>
+            <input type="text" id = "username" name = "username" value =""><br/>
+            <i><p id ="msg"></p></i>
+            <input type="submit" id = "button" name = "button" value = "Submit">  
+        </form>
+        <script>
+            function check(){
+                let username = document.getElementById('username').value;
+                let msg = document.getElementById('msg');
+
+                if(username==""){
+                    msg.innerHTML = "cannot be empty";
+                    msg.style.color = 'red';
+                    return false;
+                }
+                if(!((username[0] >= 'a' && username[0] <= 'z') || (username[0] >= 'A' && username[0] <= 'Z')))
+                {
+                    msg.innerHTML = "Username must start with a letter.";
+                    msg.style.color = 'red';
+                    return false;
+                }
+                if(username.indexOf(" ") == -1 || username.split(" ").length !== 2){
+                    msg.innerHTML = "must contain two word";
+                    msg.style.color = 'red';
+                    return false;
+                }
+                /*if(!(
+                    (username >= 'a' && username <= 'z') ||
+                    (username >= 'A' && username <= 'Z') ||
+                    username == '.' ||
+                    username == '-'))
+                    {
+                    msg.innerHTML = "Username can only contain letters, dots (.), or dashes (-)";
+                    msg.style.color = 'red';
+                    return false;
+                    }*/
+                    for (let i = 0; i < username.length; i++) {
+                    let x = username[i];
+
+                    if (!(
+                        (x >= 'a' && x <= 'z') ||
+                        (x >= 'A' && x <= 'Z') ||
+                        x == '.' ||
+                        x == '-'
+                    )) {
+                        msg.innerHTML = "Username can only contain letters, dots (.), or dashes (-)";
+                        msg.style.color = 'red';
+                        return false;
+                    }
+                }
+                
+                    msg.innerHTML = "";
+                    return true;
+                
+            }
+        </script>
+    </body>
+</html>
