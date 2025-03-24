@@ -1,0 +1,63 @@
+<html lang="en">
+    <head>
+        <title>Validate date of birth</title>
+    </head>
+    <body>
+        <form action="" onsubmit="return check()">
+            <fieldset style="width: 250px; height: 140px; padding: 10px; font-size: 20px;">
+                <legend><b>Date of Birth</b></legend>
+                <table border = "0">
+                    <tr>
+                        <td align="right"><b>dd</b></td>
+                        <td align="center"><b>mm</b></td>
+                        <td align="center"><b>yyyy</b></td>
+                    </tr>
+                    <tr>
+                        <td><input type = "text" name="date" id="date" value="" style="height: 30px;width: 50px; text-align: center;"> <b><label style="font-size: 20px;">/</label></b></td>
+                        <td><input type = "text" name="date" id="month" value="" style="height: 30px;width: 50px; text-align: center;"> <b><label style="font-size: 20px;">/</label></b></td>
+                        <td><input type = "text" name="date" id="year" value="" style="height: 30px;width: 50px; text-align: center;"></td>
+                    </tr>
+                </table>
+                <hr style="width:200px;text-align:left;margin-left:0;">
+                <i><b><p id="msg" style="font-size: 10px;"></p></b></i>
+                <input type ="submit" name = "button" id="button" value="Submit" style="height: 20px;width: 65px; font-size: 13px;">
+            </fieldset>
+        </form>
+        <script>
+            function check(){
+                let date = document.getElementById("date").value;
+                let month = document.getElementById("month").value;
+                let year = document.getElementById("year").value;
+                let msg = document.getElementById('msg');
+
+                let dateN = parseInt(date);
+                let monthN = parseInt(month);
+                let yearN = parseInt(year);
+
+                if(date=="" ||  month=="" || year==""){
+                    msg.innerHTML = "Field information is required";
+                    msg.style.color = 'red';
+                    return false;
+                }
+                if (!(dateN >= 1 && dateN <= 31)) {
+                    msg.innerHTML = "Invalid day. Enter a number between 1-31.";
+                    msg.style.color = "red";
+                    return false;
+                }
+                if (!(monthN >= 1 && monthN <= 12)) {
+                    msg.innerHTML = "Invalid month. Enter a number between 1-12.";
+                    msg.style.color = "red";
+                    return false;
+                }
+                if (!(yearN >= 1900 && yearN <= 2016)) {
+                    msg.innerHTML = "Invalid year. Enter a number between 1900-2016.";
+                    msg.style.color = "red";
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        </script>
+    </body>
+</html>

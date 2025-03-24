@@ -1,0 +1,47 @@
+<html lang="en">
+    <head>
+        <title>Validate Profile Picture</title>
+    </head>
+    <body>
+        <form action="" onsubmit="return check()">
+            <fieldset style="width: 250px; height: 150px; padding: 10px; font-size: 20px;">
+                <legend>Profile Picture</legend>
+                <label>User Id</label>
+                <input type = "text" name = "number" id = "number" value=""><br/>
+                <label>Picture</label>
+                <input type = "file" name = "picture" id = "picture" value="" style="margin-left: 65px;margin-top: -17px;;">
+                <hr style="width:200px;text-align:left;margin-left:0;">
+                <i><b><p id="msg" style="font-size: 10px;"></p></b></i>
+                <input type ="submit" name = "button" id="button" value="Submit" style="height: 20px;width: 65px; font-size: 13px;">
+            </fieldset>
+        </form>
+        <script>
+            function check(){
+            let userid = document.getElementById("number").value;
+            let picture = document.getElementById("picture").files.length;
+            let msg = document.getElementById("msg");
+
+            let userN = parseInt(userid);
+
+            if(userid ==""){
+                msg.innerHTML = "User Id cannot be empty"
+                msg.style.color = "red";
+                return false;
+            }
+            if(!(userN >= 1) ){
+                msg.innerHTML = "Please enter a positive number"
+                msg.style.color = "red";
+                return false;
+            }
+            if(picture == ""){
+                msg.innerHTML = "No picture is selected"
+                msg.style.color = "red";
+                return false;
+            }
+            else{
+                return true;
+            }
+            }
+        </script>
+    </body>
+</html>
