@@ -1,18 +1,32 @@
-<html>
+<html lang="en">
+    <head>
+        <title>Login page</title>
+    </head>
     <body>
-        <form action="home.html">
+        <form action="home.html" onsubmit="return check()">
             <table>
                 <tr>
                     <td>Username :</td>
-                    <td><input type = "text"></td>
+                    <td>
+                        <input type = "text" id="username" name="username" value="">
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right"><i><p id="msg" style="margin-right: -9px;"></p></i></td>
                 </tr>
                 <tr>
                     <td>Password :</td>
-                    <td><input type = "passwrod"></td>
+                    <td>
+                        <input type = "password" id="password" name="password" value="">  
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right"><i><p id="msg1" style="margin-right: -9px;"></p></i></td>
                 </tr>
                 <tr></tr>
                 <tr>
-                    <td colspan="2" align="center"><input type ="checkbox">Remmember me</td>
+                    <td colspan="2" align="right"><input type ="checkbox" style="vertical-align: middle;"><label style="vertical-align: middle; color: blue;">Remmember me</label></td>
                 </tr>
                 <tr>
                     <td colspan = "2" align = "right">
@@ -22,5 +36,44 @@
                 
             </table>
         </form>
+        <script>
+            function check(){
+                let username = document.getElementById('username').value;
+                let msg = document.getElementById('msg');
+
+                let password = document.getElementById('password').value;
+                let msg1 = document.getElementById('msg1');
+
+                let flag = true;
+
+                if(username==""){
+                    msg.innerHTML = "please type username first!";
+                    msg.style.color = 'red';
+                    flag = false;
+                }
+                else{
+                    msg.innerHTML = "";
+                }
+                if(password==""){
+                    msg1.innerHTML = "please type password first!";
+                    msg1.style.color = 'red';
+                    flag = false;
+                }
+                else{
+                    msg1.innerHTML = "";
+                }
+
+                if (!flag) {
+                return false;
+                }
+
+                if(username == password){
+                    return true;
+                }else{
+                    alert("Username and password must be the same!");
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
