@@ -3,9 +3,9 @@
         <title>Validate Name Page</title>
     </head>
     <body>
-        <form action="" onclick="return check()">
+        <form action="" onsubmit="return check()">
             <label>Name</label><br/>
-            <input type="text" id = "username" name = "username" value =""><br/>
+            <input type="text" id = "username" name = "username" value ="">
             <i><p id ="msg"></p></i>
             <input type="submit" id = "button" name = "button" value = "Submit">  
         </form>
@@ -25,21 +25,13 @@
                     msg.style.color = 'red';
                     return false;
                 }
-                if(username.indexOf(" ") == -1 || username.split(" ").length !== 2){
-                    msg.innerHTML = "must contain two word";
+                
+                let word = username.split(" ");
+                if (word.length !== 2) {
+                    msg.innerHTML = "Must contain exactly two words.";
                     msg.style.color = 'red';
                     return false;
                 }
-                /*if(!(
-                    (username >= 'a' && username <= 'z') ||
-                    (username >= 'A' && username <= 'Z') ||
-                    username == '.' ||
-                    username == '-'))
-                    {
-                    msg.innerHTML = "Username can only contain letters, dots (.), or dashes (-)";
-                    msg.style.color = 'red';
-                    return false;
-                    }*/
                     for (let i = 0; i < username.length; i++) {
                     let x = username[i];
 
@@ -47,7 +39,8 @@
                         (x >= 'a' && x <= 'z') ||
                         (x >= 'A' && x <= 'Z') ||
                         x == '.' ||
-                        x == '-'
+                        x == '-' ||
+                        (x === ' ' && username[i - 1] !== ' ')
                     )) {
                         msg.innerHTML = "Username can only contain letters, dots (.), or dashes (-)";
                         msg.style.color = 'red';
