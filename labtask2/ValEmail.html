@@ -1,0 +1,74 @@
+<html lang="en">
+    <head>
+        <title>Email Validation</title>
+    </head>
+    <body>
+        <form action="" onsubmit="return check()">
+          <label>Email</label>
+            <input type="email" id = "email" name = "email" value ="">
+            <label id= "info"
+             style="display: inline-block;
+              width: 15px;
+              height: 15px; 
+              border: 2px solid  #007bff; 
+              color:#007bff; 
+              text-align: center; 
+              vertical-align: middle; 
+              font-size: 14px; 
+              font-weight: bold; 
+              cursor:pointer; 
+              position: relative; 
+              font-family: Arial, Helvetica, sans-serif;">
+                i
+                <span id = "infostyle"
+                style="visibility: hidden;
+                height: 15px;
+                width: 150px; 
+                background-color: gainsboro; 
+                color: black; 
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 0.5px;
+                border-radius: 5px; 
+                border: 1px solid black; 
+                position: absolute; 
+                top: 100%; 
+                left: 70%; 
+                font-size: 10px;
+                font-weight: normal;">
+                    hint: sample@example.com
+                </span>
+            </label>
+            <i><p id="msg"></p></i>
+            <input type="submit" id="button" name="button" value="Submit">
+            
+            <script>
+                const info = document.getElementById('info');
+                const infostyle = document.getElementById('infostyle');
+
+                info.onmouseover = () => {
+                    infostyle.style.visibility = 'visible';  
+                };
+                info.onmouseout = () => {
+                    infostyle.style.visibility = 'hidden';  
+                };
+                function check(){
+                    let email = document.getElementById('email').value;
+                    let msg = document.getElementById('msg');
+
+                    if(email == ""){
+                        msg.innerHTML = "cannot be empty";
+                        msg.style.color = 'red';
+                        return false;
+                    }
+                    if (!email.endsWith("example.com")) {
+                        alert("Please enter a valid email address.");
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+            </script>
+        </form>
+    </body>
+</html>
