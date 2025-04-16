@@ -1,41 +1,135 @@
 <html>
-    <head>
-        <title>Calculator</title>
-    </head>
-    <body>
-        <table border="1">
-            <tr>
-                <td colspan="4"><input type="text"></td>
-            </tr>
-            <tr>
-                <td>AC</td>
-                <td>C</td>
-                <td>%</td>
-                <td>/</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>*</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>+</td>
-            </tr>
-            <tr>
-                <td colspan="2">0</td>
-                <td>.</td>
-                <td>=</td>
-            </tr>
-        </table>
-    </body>
+<head>
+    <title>Calculator</title>
+</head>
+<body>
+    <table border="1" style="border-collapse: collapse; ">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="display" disabled
+                style="width: 100%; height: 50px; font-size: 20px; text-align: right;">
+            </td>
+        </tr>
+        <tr>
+            <td><button onclick="clearDisplay()" style="width: 100%; height: 60px; font-size: 20px;">AC</button></td>
+            <td><button onclick="clearLast()" style="width: 100%; height: 60px; font-size: 20px;">C</button></td>
+            <td><button onclick="setOperator('%')" style="width: 100%; height: 60px; font-size: 20px;">%</button></td>
+            <td><button onclick="setOperator('/')" style="width: 100%; height: 60px; font-size: 20px;">/</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToDisplay('7')" style="width: 100%; height: 60px; font-size: 20px;">7</button></td>
+            <td><button onclick="addToDisplay('8')" style="width: 100%; height: 60px; font-size: 20px;">8</button></td>
+            <td><button onclick="addToDisplay('9')" style="width: 100%; height: 60px; font-size: 20px;">9</button></td>
+            <td><button onclick="setOperator('*')" style="width: 100%; height: 60px; font-size: 20px;">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToDisplay('4')" style="width: 100%; height: 60px; font-size: 20px;">4</button></td>
+            <td><button onclick="addToDisplay('5')" style="width: 100%; height: 60px; font-size: 20px;">5</button></td>
+            <td><button onclick="addToDisplay('6')" style="width: 100%; height: 60px; font-size: 20px;">6</button></td>
+            <td><button onclick="setOperator('-')" style="width: 100%; height: 60px; font-size: 20px;">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToDisplay('1')" style="width: 100%; height: 60px; font-size: 20px;">1</button></td>
+            <td><button onclick="addToDisplay('2')" style="width: 100%; height: 60px; font-size: 20px;">2</button></td>
+            <td><button onclick="addToDisplay('3')" style="width: 100%; height: 60px; font-size: 20px;">3</button></td>
+            <td><button onclick="setOperator('+')" style="width: 100%; height: 60px; font-size: 20px;">+</button></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="addToDisplay('0')" style="width: 100%; height: 60px; font-size: 20px;">0</button>
+            </td>
+            <td><button onclick="addToDisplay('.')" style="width: 100%; height: 60px; font-size: 20px;">.</button></td>
+            <td><button onclick="calculate()" style="width: 100%; height: 60px; font-size: 20px;">=</button></td>
+        </tr>
+    </table>
+
+    <script>
+        let display = document.getElementById("display");
+        let Input = "";
+        let pInput = "";
+        let operator = "";
+        let Calculated = false;
+
+        function addToDisplay(value) {
+
+            if (Calculated) {
+            Input = "";
+            Calculated = false;
+        }
+            Input += value;
+            display.value = Input;
+            
+        }
+
+        function clearDisplay() {
+            Input = "";
+            pInput = "";
+            operator = "";
+            Calculated = false;
+            display.value = "";
+
+        }
+
+        function clearLast() {
+            Input = Input.slice(0, -1);
+            display.value = Input;
+        }
+
+        function setOperator(op) {
+            if (Input === "")
+                return;
+            if (pInput !== "") {
+                calculate();
+            }
+
+            operator = op;
+            pInput = Input;
+            Input = "";
+        }
+
+        function calculate() {
+            if (Input === "" || operator === "") 
+                return;
+
+            let num1 = parseFloat(pInput);
+            let num2 = parseFloat(Input);
+            let result;
+
+            switch (operator) {
+                case "+": 
+                    result = num1 + num2;
+                break;
+
+                case "-":
+                     result = num1 - num2;
+                break;
+
+                case "*":
+                     result = num1 * num2; 
+                break;
+
+                case "/":
+                     if (num2 === 0) {
+                        result = "Error";
+                     } else {
+                        result = num1 / num2;
+                     }
+                break;
+
+                case "%":
+                     result = num1 % num2;
+                break;
+
+                default:
+                     result = "Error";
+            }
+
+            display.value = result;
+            Input = result.toString();
+            pInput = "";
+            operator = "";
+            Calculated = true;
+        }
+    </script>
+</body>
 </html>
